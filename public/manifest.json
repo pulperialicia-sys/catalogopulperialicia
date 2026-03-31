@@ -1,0 +1,27 @@
+{
+  "name": "Pulpería Alicia",
+  "short_name": "Alicia",
+  "description": "Catálogo digital de Pulpería Alicia – Honduras",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#060d1f",
+  "theme_color": "#060d1f",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "categories": ["shopping", "food"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "maskable"
+    }
+  ]
+}

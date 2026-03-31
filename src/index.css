@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #060d1f;
+    color: #f1f5f9;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+}
+
+/* ── Glass morphism ─────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ── Gradient text ──────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #bfdbfe 50%, #60a5fa 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-gold {
+  background: linear-gradient(135deg, #fef3c7, #fbbf24, #f59e0b);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-shimmer {
+  background: linear-gradient(90deg, #ffffff 0%, #60a5fa 30%, #ffffff 60%, #fbbf24 80%, #ffffff 100%);
+  background-size: 400% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Hero grid dots ─────────────────────────────────────────────────────── */
+.hero-dots {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Bank card shine ────────────────────────────────────────────────────── */
+.bank-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.bank-card::after {
+  content: '';
+  position: absolute;
+  top: -60%; left: -100%;
+  width: 45%; height: 220%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.22) 50%, transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+}
+.bank-card:hover::after  { animation: shine-sweep 0.8s ease forwards; }
+.bank-card:hover         { transform: translateY(-4px); }
+
+@keyframes shine-sweep {
+  from { left: -100%; }
+  to   { left: 160%; }
+}
+
+/* ── Product card ───────────────────────────────────────────────────────── */
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+@media (hover: hover) {
+  .product-card:hover { transform: translateY(-6px) scale(1.03); }
+}
+@media (hover: none) {
+  .product-card:active { transform: scale(0.96); }
+}
+
+/* ── Neon border ────────────────────────────────────────────────────────── */
+.neon-border {
+  position: relative;
+}
+.neon-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--neon-color, #60a5fa), transparent, var(--neon-color, #60a5fa));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.neon-border:hover::before { opacity: 1; }
+
+/* ── Divider shimmer ────────────────────────────────────────────────────── */
+.divider-shimmer {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(96,165,250,0.5), rgba(251,191,36,0.3), transparent);
+  background-size: 300% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Skeleton loader ────────────────────────────────────────────────────── */
+@keyframes skeleton-wave {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.10) 40%,
+    rgba(255, 255, 255, 0.04) 80%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-wave 1.4s ease-in-out infinite;
+}
+
+/* ── Search bar ─────────────────────────────────────────────────────────── */
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.35), 0 0 20px rgba(96, 165, 250, 0.12);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PRINT — Página /qr
+   Al imprimir solo se ve la tarjeta QR limpia, centrada en la hoja.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media print {
+  /* Configuración de página */
+  @page { size: A4 portrait; margin: 3cm 4cm; }
+
+  /* Forzar colores exactos (Chrome ignora los colores CSS por defecto en print) */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  /* Fondo blanco */
+  body { background: white !important; }
+
+  /* Ocultar todo lo decorativo */
+  .no-print,
+  .animate-blob1,
+  .animate-blob2,
+  .animate-blob3,
+  .hero-dots { display: none !important; }
+
+  /* Centrar la página QR */
+  .qr-page {
+    min-height: unset !important;
+    padding: 0 !important;
+    background: white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Tarjeta limpia — sin blur ni sombras innecesarias */
+  .qr-card {
+    background: white !important;
+    border: 1.5px solid #94a3b8 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    animation: none !important;
+  }
+
+  /* Ícono del carrito */
+  .qr-icon {
+    background: #1e3a8a !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  /* Título con gradient-text-shimmer — forzar tinta negra para impresión */
+  .qr-card-title {
+    -webkit-text-fill-color: #1e293b !important;
+    background: none !important;
+    animation: none !important;
+  }
+
+  /* Subtítulo */
+  .qr-card-subtitle { color: #64748b !important; }
+
+  /* Contenedor del QR — fondo blanco, sin sombra */
+  .qr-wrapper {
+    background: white !important;
+    box-shadow: none !important;
+  }
+
+  /* URL */
+  .qr-url {
+    background: #f8fafc !important;
+    color: #334155 !important;
+    border-color: #cbd5e1 !important;
+  }
+
+  /* Ocultar botón "Ver Catálogo" y botón de compartir */
+  .qr-cta { display: none !important; }
+
+  /* Mostrar instrucción de impresión (oculta en pantalla) */
+  .qr-print-only { display: block !important; }
+}
+
+/* En pantalla, la instrucción de impresión siempre está oculta */
+.qr-print-only { display: none; }
