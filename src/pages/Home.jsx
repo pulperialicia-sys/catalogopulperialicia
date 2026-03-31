@@ -197,7 +197,7 @@ export default function Home() {
 
           </div>{/* fin columna izquierda */}
 
-          {/* ── Columna derecha — emojis flotantes sobre el fondo (solo desktop) ── */}
+          {/* ── Columna derecha — emojis flotantes (solo desktop) ── */}
           <div className="hidden md:flex items-center justify-center animate-fade-up" style={{ animationDelay: '300ms' }}>
             <div className="relative w-[380px] h-[380px]">
               {[
@@ -215,9 +215,7 @@ export default function Home() {
                   key={i}
                   className={`absolute select-none pointer-events-none ${item.anim}`}
                   style={{
-                    top: item.top,
-                    left: item.left,
-                    fontSize: item.size,
+                    top: item.top, left: item.left, fontSize: item.size,
                     animationDelay: item.delay,
                     opacity: 0.55,
                     filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))',
@@ -227,6 +225,35 @@ export default function Home() {
                 </span>
               ))}
             </div>
+          </div>
+
+          {/* ── Emojis flotantes móvil ── */}
+          <div className="md:hidden absolute inset-0 pointer-events-none overflow-hidden">
+            {[
+              { emoji: '🥤', top: '4%',  left: '78%', size: '1.8rem', anim: 'animate-float',      delay: '0s'   },
+              { emoji: '🍟', top: '2%',  left: '55%', size: '1.5rem', anim: 'animate-float-slow', delay: '1.2s' },
+              { emoji: '🥛', top: '18%', left: '85%', size: '1.6rem', anim: 'animate-float-fast', delay: '0.5s' },
+              { emoji: '🍬', top: '35%', left: '80%', size: '1.5rem', anim: 'animate-float',      delay: '1.8s' },
+              { emoji: '🍞', top: '50%', left: '88%', size: '1.6rem', anim: 'animate-float-slow', delay: '0.8s' },
+              { emoji: '🧴', top: '65%', left: '75%', size: '1.5rem', anim: 'animate-float-fast', delay: '1.4s' },
+              { emoji: '🌾', top: '78%', left: '83%', size: '1.6rem', anim: 'animate-float',      delay: '0.3s' },
+              { emoji: '💊', top: '88%', left: '68%', size: '1.4rem', anim: 'animate-float-slow', delay: '2.0s' },
+              { emoji: '🧽', top: '6%',  left: '5%',  size: '1.4rem', anim: 'animate-float-slow', delay: '0.7s' },
+              { emoji: '🚬', top: '92%', left: '5%',  size: '1.4rem', anim: 'animate-float',      delay: '1.6s' },
+            ].map((item, i) => (
+              <span
+                key={i}
+                className={`absolute select-none ${item.anim}`}
+                style={{
+                  top: item.top, left: item.left, fontSize: item.size,
+                  animationDelay: item.delay,
+                  opacity: 0.18,
+                  filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.5))',
+                }}
+              >
+                {item.emoji}
+              </span>
+            ))}
           </div>
 
           </div>{/* fin grid hero */}
