@@ -43,8 +43,12 @@ export default {
         },
         'float': {
           '0%,100%': { transform: 'translateY(0px) rotate(0deg)' },
-          '33%':      { transform: 'translateY(-16px) rotate(-4deg)' },
-          '66%':      { transform: 'translateY(-8px) rotate(3deg)' },
+          '33%':      { transform: 'translateY(-14px) rotate(-3deg)' },
+          '66%':      { transform: 'translateY(-6px) rotate(2deg)' },
+        },
+        'float-b': {
+          '0%,100%': { transform: 'translateY(-8px) rotate(2deg)' },
+          '50%':      { transform: 'translateY(10px) rotate(-3deg)' },
         },
         pop: {
           '0%':   { transform: 'scale(1)' },
@@ -79,6 +83,7 @@ export default {
         'slide-left': 'slide-left 0.5s ease both',
         'scale-in':   'scale-in 0.45s ease both',
         'float':      'float 5s ease-in-out infinite',
+        'float-b':    'float-b 6s ease-in-out infinite',
         'float-slow': 'float 8s ease-in-out infinite',
         'float-fast': 'float 3.5s ease-in-out infinite',
         'pop':        'pop 0.35s ease',

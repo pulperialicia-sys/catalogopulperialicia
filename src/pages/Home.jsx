@@ -118,7 +118,10 @@ export default function Home() {
             style={{ background: 'rgba(251,191,36,0.10)', filter: 'blur(70px)' }} />
 
           {/* Contenido */}
-          <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="relative z-10 max-w-7xl mx-auto md:grid md:grid-cols-2 md:gap-12 md:items-center">
+
+          {/* ── Columna izquierda ── */}
+          <div>
 
             {/* Badge — estado en tiempo real */}
             <div
@@ -192,31 +195,41 @@ export default function Home() {
               <ShareButton />
             </div>
 
-            {/* Atajos de categoría — desktop */}
-            <div
-              className="hidden md:flex flex-wrap gap-2 mt-8 animate-fade-up"
-              style={{ animationDelay: '400ms' }}
-            >
-              {CATEGORIAS.map((cat) => {
-                const neon = NEON[cat.id]
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => handleCategoria(cat.id)}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
-                    style={{
-                      background: neon.pill,
-                      border: `1px solid ${neon.color}30`,
-                      color: neon.color,
-                    }}
-                  >
-                    <span>{cat.emoji}</span>
-                    {cat.nombre.split(' ')[0]}
-                  </button>
-                )
-              })}
+          </div>{/* fin columna izquierda */}
+
+          {/* ── Columna derecha — emojis flotantes sobre el fondo (solo desktop) ── */}
+          <div className="hidden md:flex items-center justify-center animate-fade-up" style={{ animationDelay: '300ms' }}>
+            <div className="relative w-[380px] h-[380px]">
+              {[
+                { emoji: '🥤', top: '8%',  left: '12%', size: '3.2rem', anim: 'animate-float',      delay: '0s'   },
+                { emoji: '🍟', top: '5%',  left: '62%', size: '2.6rem', anim: 'animate-float-slow', delay: '1.2s' },
+                { emoji: '🥛', top: '28%', left: '78%', size: '2.8rem', anim: 'animate-float',      delay: '0.6s' },
+                { emoji: '🍬', top: '52%', left: '70%', size: '2.4rem', anim: 'animate-float-fast', delay: '0.3s' },
+                { emoji: '🍞', top: '72%', left: '55%', size: '2.8rem', anim: 'animate-float-slow', delay: '1.8s' },
+                { emoji: '🧴', top: '75%', left: '15%', size: '2.6rem', anim: 'animate-float',      delay: '0.9s' },
+                { emoji: '🧽', top: '48%', left: '5%',  size: '2.4rem', anim: 'animate-float-fast', delay: '1.5s' },
+                { emoji: '💊', top: '25%', left: '30%', size: '2.2rem', anim: 'animate-float-slow', delay: '0.5s' },
+                { emoji: '🌾', top: '58%', left: '38%', size: '3rem',   anim: 'animate-float',      delay: '2.0s' },
+              ].map((item, i) => (
+                <span
+                  key={i}
+                  className={`absolute select-none pointer-events-none ${item.anim}`}
+                  style={{
+                    top: item.top,
+                    left: item.left,
+                    fontSize: item.size,
+                    animationDelay: item.delay,
+                    opacity: 0.55,
+                    filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))',
+                  }}
+                >
+                  {item.emoji}
+                </span>
+              ))}
             </div>
           </div>
+
+          </div>{/* fin grid hero */}
         </section>
 
         {/* Divisor */}
